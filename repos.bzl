@@ -1,5 +1,4 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@bazel_tools//tools/build_defs/repo:git.bzl")
 
 def helm_repositories():
     skylib_version = "0.8.0"
@@ -12,14 +11,14 @@ def helm_repositories():
 
     http_archive(
         name = "helm",
-        sha256 = "12632bdf85144d8883de07d257f892f447a8bccc84de82276e111059ac8437b1",
-        urls = ["https://get.helm.sh/helm-v3.0.0-alpha.1-linux-amd64.tar.gz"],
+        sha256 = "0a9c80b0f211791d6a9d36022abd0d6fd125139abe6d1dcf4c5bf3bc9dcec9c8",
+        urls = ["https://get.helm.sh/helm-v3.6.0-linux-amd64.tar.gz"],
         build_file = "@com_github_tmc_rules_helm//:helm.BUILD",
     )
 
     http_archive(
         name = "helm_osx",
-        sha256 = "f562e5bbb5b8b8a6a46c080970c1fea35ff908a1402f56e5d4c8f327c9ff4835",
-        urls = ["https://get.helm.sh/helm-v3.0.0-alpha.1-darwin-amd64.tar.gz"],
+        sha256 = "7f6bcf15e5c828504dddbe733813a6d73e41abf28d649e7b9d698c4a77d412dd",
+        urls = ["https://get.helm.sh/helm-v3.6.0-darwin-amd64.tar.gz"],
         build_file = "@com_github_tmc_rules_helm//:helm.BUILD",
     )
