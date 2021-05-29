@@ -1,5 +1,3 @@
-load("@bazel_skylib//lib:paths.bzl", "paths")
-
 HELM_CMD_PREFIX = """
 echo "#!/usr/bin/env bash" > $@
 cat $(location @com_github_tmc_rules_helm//:runfiles_bash) >> $@
@@ -8,8 +6,8 @@ echo "export BUILD_USER=$$(grep BUILD_USER bazel-out/stable-status.txt | cut -d 
 cat <<EOF >> $@
 #export RUNFILES_LIB_DEBUG=1 # For runfiles debugging
 
-export HELM=\$$(rlocation com_github_tmc_rules_helm/helm)
-PATH=\$$(dirname \$$HELM):\$$PATH
+export HELM=\\$$(rlocation com_github_tmc_rules_helm/helm)
+PATH=\\$$(dirname \\$$HELM):\\$$PATH
 """
 
 def helm_chart(name, srcs, update_deps = False):
@@ -109,14 +107,14 @@ def helm_release(name, release_name, chart, values_yaml = None, values = None, n
         cmd = HELM_CMD_PREFIX + """
 export CHARTLOC=$(location """ + chart + """)
 EXPLICIT_NAMESPACE=""" + namespace + """
-NAMESPACE=\$${EXPLICIT_NAMESPACE:-\$$NAMESPACE}
-export NS=\$${NAMESPACE:-\$${BUILD_USER}}
-if [ "\$$1" == "upgrade" ]; then
-    helm tiller run \$$NS -- helm \$$@ --namespace \$$NS """ + release_name + " " + set_params + " " + values_param + """ \$$CHARTLOC 
-elif [ "\$$1" == "test" ]; then
-    helm tiller run \$$NS -- helm test --cleanup """ + release_name + """
+NAMESPACE=\\$${EXPLICIT_NAMESPACE:-\\$$NAMESPACE}
+export NS=\\$${NAMESPACE:-\\$${BUILD_USER}}
+if [ "\\$$1" == "upgrade" ]; then
+    helm tiller run \\$$NS -- helm \\$$@ --namespace \\$$NS """ + release_name + " " + set_params + " " + values_param + """ \\$$CHARTLOC
+elif [ "\\$$1" == "test" ]; then
+    helm tiller run \\$$NS -- helm test --cleanup """ + release_name + """
 else
-    helm tiller run \$$NS -- helm \$$@ """ + release_name + """
+    helm tiller run \\$$NS -- helm \\$$@ """ + release_name + """
 fi
 
 EOF""",
