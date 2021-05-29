@@ -121,5 +121,5 @@ EOF""",
     _helm_cmd("install.wait", ["upgrade", "--install", "--wait"], name, helm_cmd_name, values_yaml)
     _helm_cmd("status", ["status"], name, helm_cmd_name, values_yaml)
     _helm_cmd("delete", ["delete"], name, helm_cmd_name, values_yaml)
-    _helm_cmd("test", ["test", "run", "--cleanup"], name, helm_cmd_name, values_yaml)
-    _helm_cmd("test.noclean", ["test", "run"], name, helm_cmd_name, values_yaml)
+    _helm_cmd("test", ["test", "--cleanup"], name, helm_cmd_name, values_yaml)
+    _helm_cmd("test.noclean", ["test"], name, helm_cmd_name, values_yaml)
