@@ -1,5 +1,5 @@
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl")
 
 def helm_repositories():
     skylib_version = "0.8.0"
@@ -12,22 +12,14 @@ def helm_repositories():
 
     http_archive(
         name = "helm",
-        sha256 = "804f745e6884435ef1343f4de8940f9db64f935cd9a55ad3d9153d064b7f5896",
-        urls = ["https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz"],
+        sha256 = "12632bdf85144d8883de07d257f892f447a8bccc84de82276e111059ac8437b1",
+        urls = ["https://get.helm.sh/helm-v3.0.0-alpha.1-linux-amd64.tar.gz"],
         build_file = "@com_github_tmc_rules_helm//:helm.BUILD",
     )
 
     http_archive(
         name = "helm_osx",
-        sha256 = "392ec847ecc5870a48a39cb0b8d13c8aa72aaf4365e0315c4d7a2553019a451c",
-        urls = ["https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-darwin-amd64.tar.gz"],
-        build_file = "@com_github_tmc_rules_helm//:helm.BUILD",
-    )
-
-    new_git_repository(
-        name = "helm_tiller",
-        remote = "https://github.com/rimusz/helm-tiller",
-        commit = "a77f505e062d8337e8fd638796bfecc8a4a00bcc",
-        shallow_since = "1553679518 +0000",
+        sha256 = "f562e5bbb5b8b8a6a46c080970c1fea35ff908a1402f56e5d4c8f327c9ff4835",
+        urls = ["https://get.helm.sh/helm-v3.0.0-alpha.1-darwin-amd64.tar.gz"],
         build_file = "@com_github_tmc_rules_helm//:helm.BUILD",
     )
