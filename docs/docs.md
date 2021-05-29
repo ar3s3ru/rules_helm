@@ -67,6 +67,8 @@ A given target has the following executable targets generated:
 `(target_name).delete`
 `(target_name).test`
 `(target_name).test.noclean`
+`(target_name).template`
+`(target_name).template.debug`
 
 
 ### Parameters

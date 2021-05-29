@@ -78,6 +78,8 @@ def helm_release(name, release_name, chart, values_yaml = None, values = None, n
     `(target_name).delete`
     `(target_name).test`
     `(target_name).test.noclean`
+    `(target_name).template`
+    `(target_name).template.debug`
 
     Args:
         name: A unique name for this rule.
@@ -111,6 +113,9 @@ NAMESPACE=\\$${EXPLICIT_NAMESPACE:-\\$$NAMESPACE}
 export NS=\\$${NAMESPACE:-\\$${BUILD_USER}}
 if [ "\\$$1" == "upgrade" ]; then
     helm \\$$@ --namespace \\$$NS """ + release_name + """ \\$$CHARTLOC --values=$(location """ + values_yaml + """)
+elif [ "\\$$1" == "template" ]; then
+    echo \\$$PWD
+    helm \\$$@ """ + release_name + """ ./\\$$CHARTLOC --values=$(location """ + values_yaml + """)
 else
     helm \\$$@ --namespace \\$$NS """ + release_name + """
 fi
@@ -123,3 +128,5 @@ EOF""",
     _helm_cmd("delete", ["delete"], name, helm_cmd_name, values_yaml)
     _helm_cmd("test", ["test", "--cleanup"], name, helm_cmd_name, values_yaml)
     _helm_cmd("test.noclean", ["test"], name, helm_cmd_name, values_yaml)
+    _helm_cmd("template", ["template"], name, helm_cmd_name, values_yaml)
+    _helm_cmd("template.debug", ["template", "--debug"], name, helm_cmd_name, values_yaml)
